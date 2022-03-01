@@ -1,0 +1,7 @@
+How to use tar.c/tar.exe:
+
+
+cmd:
+    tar.exe <tar-file-name> <files>
+powershell:
+    ./tar <tar-file-name> <files>
