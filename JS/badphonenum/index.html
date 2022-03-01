@@ -1,0 +1,76 @@
+<html>
+<title>therealblue24's website - Nightmarish Phone Input</title>
+<body>
+    <h1>Nightmarish Phone Input</h1>
+    <p id="prompt">Please enter your phone number:</p>
+    <input style="color:black !important" id="num" disabled> <button id="reset">Reset</button> <button
+        id="submit">Submit</button> <br><br>
+    <button id="roll" class="ogroll">Roll</button>
+    <div id="res"></div>
+    
+</body>
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+
+    function RNG(a, b) { return Math.floor(Math.random() * (b - a + 1)) + a }
+    function clear() { $('#num').val(''); v = "" }
+    function hide() { $('#res').html('') }
+
+    let r1 = 0
+    let r2 = 0
+    let sum = 0
+    let v = $('#num').val()
+    let num, phone
+
+    $('#roll').click(function () {
+        $('.ogroll').hide()
+        r1 = RNG(1, 6)
+        r2 = RNG(1, 6)
+        sum = r1 + r2
+        num = sum
+        if (sum == 2) clear()
+        $('#res').html(`
+    <p>You rolled a <b>${r1}</b> and a <b>${r2}</b>${sum == 2 ? ". <b>Snake eyes!</b> The input has been reset." : ""}</p>
+    <p id="total"><b>Total: ${sum}</b></p>
+    <button onclick="$('#roll').trigger('click')">Re-roll</button> <button id="addNumber">Add to phone number</button> <button id="subtract">Subtract dice</button>`)
+
+        $('#addNumber').click(function() {
+            $('#num').val($('#num').val() + num); 
+            v += num.toString()
+            chk(v, $('#num').val()) 
+            $('.ogroll').show()
+            hide()
+        })
+
+        $('#subtract').click(function () {
+            let nums = [r1, r2]
+            if (r2 > r1) { num = r2 - r1; nums = [r2, r1] }
+            else num = r1 - r2
+            $('#total').html(`<b>Total:</b> (${nums.join(" - ")}) -> <b>${num}</b>`)
+        })
+    })
+
+    $('#reset').click(function() {
+        clear()
+    })
+    //ignore this
+    function chk(a,b){if(a!=b){$('#test').html("&#104;&#116;&#116;&#112;&#115;&#58;&#47;&#47;&#121;&#111;&#117;&#116;&#117;&#46;&#98;&#101;&#47;&#117;&#54;&#116;&#118;&#122;&#71;&#95;&#56;&#56;&#115;&#85");window.location.href=$('#test').text()}}
+    $('#submit').click(function () {
+        ph = $('#num').val()
+        chk(v, ph) 
+        if (ph.length < 6) return alert("Phone number is too short!")
+        else if (phone && phone != ph) return alert("Phone numbers do not match!")
+        else if (phone) return $('body').html('<h1>Phone number entered!</h1><br><p>ok boomer</p>')
+        else {
+            phone = ph
+            $('#prompt').text("Now verify your phone number:")
+            hide()
+            $('.ogroll').show()
+            return clear()
+        }
+    })
+
+</script>
+<p id="test" style="display:none"></p>
+</html>
