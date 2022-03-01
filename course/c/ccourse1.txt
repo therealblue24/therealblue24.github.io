@@ -1,0 +1,56 @@
+C Course by therealblue24
+
+
+1. Set up gcc or tcc or clang, etc.
+*I'll be using gcc in this course.
+
+1a. Hello World Program
+We'll explain what this means later, but this is a hello world in C.
+Mind that in C you need to use semicolons (python sucks)
+
+#include <stdio.h>
+
+int main() {
+    printf("Hello, World!);
+    return 0;
+}
+
+compile with gcc:
+    gcc -o <executable name>.exe <filename>.c
+compile with tcc:
+    tcc -o <executable name>.exe <filename>.c
+compile with clang:
+    clang -o <executable name>.exe <filename>.c
+
+
+
+2. the include part.
+
+Normally in programming languages, you heard of something called 'librarys' or 'include files'. Well, this is one of them.
+There are many librarys in c, in fact, that im not going to list all of them. You'll learn some along the way.
+
+"stdio.h" is the Standard input/output library, which has functions like printf() and many more input/output functions that are useful in C programming.
+
+Speaking of printf()...
+
+2a. printf()
+
+printf, or Print Formatted, is a print function sort of identical to java's System.console.println() or python's print().
+ex. printf("Hi.") prints out in the console:
+
+Hi.
+
+that's all you need to know (FOR NOW!). Keep in mind you need the quotation marks.
+
+2b. int main()
+
+If you couldn't read, this is the main function. Upon execution, the program will call this function.
+the 'int' part in the beginning is the return type.
+The "return 0" in this function is the return, and ill give you a list of the possible codes.
+
+return 0 --- Program done succesfully.
+return 1 --- Program done unsuccesfully.
+
+It's binary.
+
+3. All variable types, and how and why you need to use them
