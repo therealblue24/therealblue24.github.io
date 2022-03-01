@@ -1,6 +1,12 @@
 C Course by therealblue24
 
 
+====== STILL A WORK IN PROGRESS ======
+
+====== STILL A WORK IN PROGRESS ======
+
+
+
 1. Set up gcc or tcc or clang, etc.
 *I'll be using gcc in this course.
 
