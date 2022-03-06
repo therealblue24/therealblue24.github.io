@@ -13,11 +13,11 @@ C Course by therealblue24
 1a. Hello World Program
 We'll explain what this means later, but this is a hello world in C.
 Mind that in C you need to use semicolons (python sucks)
-
+Also mind that a // is a comment.
 #include <stdio.h>
 
 int main() {
-    printf("Hello, World!);
+    printf("Hello, World!");
     return 0;
 }
 
@@ -60,3 +60,67 @@ return 1 --- Program done unsuccesfully.
 It's binary.
 
 3. All variable types, and how and why you need to use them
+
+Brief summary of variable types:
+    short: value -32768 to 32767
+    int: value -65536 to 65536
+    long: value -2147483648 to 2147483647
+    long long: value -2^63 to 2^63-1 (a lot)
+    unsigned short: value 0 to 65535
+    unsigned int: value 0 to 131071
+    unsigned long: value 0 to 4294967295
+    unsigned long long: value 0 to 2^64-1 (A LOT LOT)
+    char: a character (ex. a)
+    float: floating-point single precsion (7 decimal places accuracy)
+    double: floating-point double precsion (15-17 decimal places accuracy)
+There's a lot of them. But you'll usally use
+int, long, float, and char.
+
+to simply define one of these variables, go by this refrence:
+
+<variableType> <variableName> = <variableValue> <typeSpecifier (only for some variable types)>
+Let's take a look at this.
+
+variableType: the type of the variable
+variableName: the name
+variableValue: do i need to explain this
+typeSpecifier: You only need this if you're declaring a variable of type:
+    float
+    double
+    long (optinal)
+    long long
+    unsigned long
+    unsigned long long
+
+Let's see how we can use these variables in our code.
+
+EXAMPLE
+
+#include <stdio.h>
+
+int main() {
+    short binary = 0;  //There is no bit variable so this is a replacement
+
+    int counter; //ints are perfect for counters
+
+    long var = 78121918L; //longs are only used as a replacement to int if you need more number space
+
+    long long memorySlot = 197281921212LL; //long long can be used for memory slots for instance
+
+    char grade = 'A'; //chars are nice for storing a charcter status or just character
+
+    float gpa = 4.00000f; //floats are used for general-purpose decimals, they are also used when doing gpa
+
+    double accurategpa = 3.99999999D; //doubles are used if your program REALLY uses decimals
+
+    //all unsigned variable types are used if you aren't dealing with negative numbers.
+    return 0; //exit program.
+}
+
+4. the const keyword
+
+Now, this section can be explained with a few lines; so I will explain it with a few lines.
+
+A const variable is a variable that is set once and never modified again. To declare a variable like this, just use:
+
+const <variableType> <variableName> = <variableValue> <typeSpecifier (only for some variable types)>
