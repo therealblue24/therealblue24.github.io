@@ -1,0 +1,2 @@
+test-pkg.exe
+test-test-pkg.exe
