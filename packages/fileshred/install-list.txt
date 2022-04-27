@@ -1,1 +1,0 @@
-gcc -O2 -o filebad.exe fileshred.c

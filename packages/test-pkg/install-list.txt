@@ -1,2 +1,0 @@
-gcc -o test-pkg.exe helloworld.c
-gcc -o test-test-pkg.exe test.c

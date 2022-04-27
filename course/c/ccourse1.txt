@@ -111,7 +111,7 @@ int main() {
 
     float gpa = 4.00000f; //floats are used for general-purpose decimals, they are also used when doing gpa
 
-    double accurategpa = 3.99999999D; //doubles are used if your program REALLY uses decimals
+    double accurategpa = 3.99999999f; //doubles are used if your program REALLY uses decimals
 
     //all unsigned variable types are used if you aren't dealing with negative numbers.
     return 0; //exit program.

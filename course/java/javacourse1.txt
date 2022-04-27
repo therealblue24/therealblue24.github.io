@@ -1,17 +1,1 @@
-Java Course by therealblue24
-
-
-====== STILL A WORK IN PROGRESS ======
-
-====== STILL A WORK IN PROGRESS ======
-
-Before using this course, setup a JDK for Java first.
-
-1. Hello world program
-We'll explain what this means later, but this is a hello world in Java.
-
-class HelloWorld {
-    public static void main(String[] args) {
-        System.out.println("Hello, World!");
-    }
-}
+Frick Java course

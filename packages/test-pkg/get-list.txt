@@ -1,2 +1,0 @@
-helloworld.c
-test.c

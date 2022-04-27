@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>therealblue24's website - JPEG Decoder fixes</title>
+        <style>
+            body {
+                background-color: white;
+                color: black;
+                font-family: Arial, Helvetica, sans-serif;
+                font-size: 16;
+            }
+            code {
+                font-family: Consolas;
+                color: black;
+                background-color: #f1f1f1;
+                padding: 2px;
+                font-size: 95%;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>JPEG Image Fixes (remove as much artifacts as possible)</h1>
+        <p>The JPEG format is amazing, in fact, I would say it's more intersing than PNG's LZSS + Huffman Coding DEFLATE Algorithim.</p>
+        <p>JPEG has all good sides &ndash; Small images, less time to encode and decode, etc.</p>
+        <p>JPEG has 1 downside though &ndash; <strong>JPEG Artifacts.</strong></p>
+        <p>Those artifacts annoy the frick out of me, so I decided to "optimise" the decoding/decompression process.</p>
+        <p><strong>NOTE: I am not changing the way the image is encoded. In this page I will demonstarte things the decoder can do to help fix the artifacts.</strong></p>
+        <p>Let's start!</p>
+        <h2>1: Chroma Subsampling</h2>
+        <p>Chroma Subsampling is the process in the JPEG encoder where the Cb and Cr components of the image is downscaled by a factor of 2 to save space.</p>
+        <p>The downside of this process is that it leaves (upon decoding) this, bulgy, ugly, and horryifying 2x2 block of same color. It doesn't look good at all.</p>
+        <p><strong>NOTE: I am saying these critisisms if the image did not have the Y component. That fixes the image somewhat.</strong></p>
+        <p>The critisism I said above goes for smaller images, but still if you zoom in an image you will see it, eventually.</p>
+        <p>So we can apply some algorithim to smoothen the subsample upon decoding, right?</p>
+        <p>Well, that works, but it looks like this in the case of C{b/r} case:</p>
+        <img src="img/demo1.png" alt="Demo no. 1">
+        <p>^ Subsample value from 23 to 56 from a smoothing 0...100</p>
+        <p><strong>Math equation is f(x) = p0 + x(p1 - p0)</strong></p>
+        <p>It's fine compared to justs blocks of color, but it doesn't look natural, because we're using linear interpolation (lerping.)</p>
+        <p>Luckily, some random person invented something called the 'slerp'. It's lerping but it's triginomical.</p>
+        <p>Were going to do a hybrid of lerping and slerping, which outputs: </p>
+        <img src="img/demo2.png" alt="Demo no. 2">
+        <p>That looks a lot better, doesn't it? It has a lot more life than the previous one.</p>
+        <p><strong>Math equation is f(x) = p0 + x(p1 - p0) * sin(x/0.5pi)</strong></p>
+        <p>You can then apply this f(x) to the rows of the decoded subsample and then the columuns of the subsample, and boom, smoothed subsamples.</p>
+        <p><strong>NOTE: This subsample-fixer algorithim may not restore all color of the previous state of the image. The f(x) function predicts that the orginal unsampled data grew gradually instead of crazy growth.</strong></p>
+        <h2>2: The Luma's DCT-Fixer</h2>
+        <p>If you know the JPEG format then the Luma component may be a challenge to remove artifacts from. Well, yes it is, because you can't predict the quality of an image to restore a sample. So, if we want to go the easy route, we have to work with a constant quailty factor.</p>
+        <p><strong>BUT That's for cheaters!</strong></p>
+        <p>We want a algorithim that fixes the Luma part of the image without a hardcoded quailty factor. This is the hard route, people.</p>
+        <p><strong>NOTE: The Luma part of the image will be restored more awfully than the Cb/Cr parts of the image because the JPEG formats goes "haha losing luma component info go bRRRRRRRRRRRRRRRRRRRRR"</strong></p>
+        <p>I had 2 ways of doing this:</p>
+        <p>&emsp; 1. "Error-Correction" Discrete Cosine Transform</p>
+        <p>&emsp; 2. Predicting the quality of a 8 by 8 chunk</p>
+        <h3>"Error-Correction" Discrete Cosine Transform</h3>
+        <p>(I call this algorithim fDCT.)</p>
+        <p>The way how fDCT works is by reconstructing the chunk and then detecting high frequences out of nowhere via deriatives.</p>
+        <p>If a deriative of the image chunk <code> i(x): x, y -> x + yw</code> still has these high out of nowhere frequences, then we do somehting called: <strong>Another Deriative.</strong> I never knew it ws rocket science. Anyway, here's a C-like psudeocode implemantion &nbsp;</p>
+        <p><code>struct jpeg_chunk fix(struct jpeg_chunk chk, float ins) {</code></p>
+        <p><code>&emsp;&emsp;struct jpeg_chk_f line = construct(chk);</code></p>
+        <p><code>&emsp;&emsp;line = deriative(line);</code></p>
+        <p><code>&emsp;&emsp;for(int i=0;i is smaller than 64;i++) {</code></p>
+        <p><code>&emsp;&emsp;&emsp;&emsp;if(line.vis[i] >= ins) {</code></p>
+        <p><code>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;mark vis[i] as a artifact and blend it</code></p>
+        <p><code>&emsp;&emsp;&emsp;&emsp;}</code></p>
+        <p><code>&emsp;&emsp;&emsp;&emsp;if(line.vis[i] - line.vis[i--] >= ins * 2) {</code></p>
+        <p><code>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;line = deriative(line);</code></p>
+        <p><code>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;i = 0;</code></p>
+        <p><code>&emsp;&emsp;&emsp;&emsp;}</code></p>
+        <p><code>&emsp;&emsp;}</code></p>
+        <p><code>&emsp;&emsp;struct jpeg_chunk ret = assemblechunk(line);</code></p>
+        <p><code>&emsp;&emsp;return ret;</code></p>
+        <p><code>}</code></p>
+        <h3>Predicting the quality of a 8 by 8 chunk</h3>
+        <p>I think this algorithim is both easy and hard. Easy for humans, (time) complex for computers</p>
+        <p><strong>Not finished yet.</strong></p>
+    </body>
+</html>
