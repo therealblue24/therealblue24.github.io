@@ -1,6 +1,7 @@
 function displayAd(filename) {
     $(document).ready(function(){
         $("img").attr("src", filename);
+        $("img").attr("alt", "john");
     });
 }
 
