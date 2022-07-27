@@ -1,0 +1,99 @@
+<html>
+    <head>
+        <style>
+            body {
+                    background-color: white;
+                    color: black;
+                    font-family: Arial, Helvetica, sans-serif;
+                    font-size: 16;
+                }
+            pre {
+                font-family: Arial, Helvetica, sans-serif;
+            }    
+      table.item    { border-top: 1px solid #000000; border-left: 1px solid #000000; }
+      table.item td { border-right: 1px solid #000000; border-bottom: 1px solid #000000; }
+      table.item th { border-right: 1px solid #000000; border-bottom: 1px solid #000000; }
+      .cf { background:#FFC7C7;}
+      .ct { background:#9EFF9E;}
+      .cu { background: #f4f424;}
+        </style>
+        <title>therealblue24's website - tritwise operations - truth tables</title>
+    </head>
+    <body>
+        <h1>Ternary 'Tritwise' Logic</h1><p>(proof coming soon)</p>
+        <p>vocab. F = 0, U = 2, T = 1; q is out; q^ is is not(q); q~ is func(q)</p>
+        <p>not a</p>
+        <table width="9%" cellspacing="0" class="item">
+            <tbody>
+                <tr><th>a</th><th>q</th></tr>
+                <tr><td class="cf">F</td><td class="ct">T</td></tr>
+                <tr><td class="cu">U</td><td class="cu">U</td></tr>
+                <tr><td class="ct">T</td><td class="cf">F</td></tr>
+            </tbody>
+        </table>
+        <div>
+            <p>Notes:</p>
+            <p><b>1.</b> not(not(n)) MUST be n.</p>
+        </div>
+        <p>and a, b</p>
+        <table width="14.5%" cellspacing="0" class="item">
+            <tbody>
+                <tr><th>a</th><th>b</th><th>q</th></tr>
+                <tr><td class="cf">F</td><td class="cf">F</td><td class="cf">F</td></tr>
+                <tr><td class="cf">F</td><td class="cu">U</td><td class="ct">T</td></tr>
+                <tr><td class="cf">F</td><td class="ct">T</td><td class="cu">U</td></tr>
+                <tr><td class="cu">U</td><td class="cf">F</td><td class="ct">T</td></tr>
+                <tr><td class="cu">U</td><td class="cu">U</td><td class="cu">U</td></tr>
+                <tr><td class="cu">U</td><td class="ct">T</td><td class="ct">T</td></tr>
+                <tr><td class="ct">T</td><td class="cf">F</td><td class="cu">U</td></tr>
+                <tr><td class="ct">T</td><td class="cu">U</td><td class="ct">T</td></tr>
+                <tr><td class="ct">T</td><td class="ct">T</td><td class="ct">T</td></tr>
+            </tbody>
+        </table>
+        <div>
+            <p>Notes:</p>
+            <p><b>1.</b> and(T, T) MUST be T.</p>
+            <p><b>2.</b> and(F, F) MUST be F.</p>
+            <p><b>3.</b> and(a, b) = floor((a + b)/2).</p>
+            <pre>                      ^ always use floor in integer operations.</pre>
+        </div>
+        <p>nand a, b</p>
+        <table width="14.5%" cellspacing="0" class="item">
+            <tbody>
+                <tr><th>a</th><th>b</th><th>q</th></tr>
+                <tr><td class="cf">F</td><td class="cf">F</td><td class="ct">T</td></tr>
+                <tr><td class="cf">F</td><td class="cu">U</td><td class="cf">F</td></tr>
+                <tr><td class="cf">F</td><td class="ct">T</td><td class="cu">U</td></tr>
+                <tr><td class="cu">U</td><td class="cf">F</td><td class="cf">F</td></tr>
+                <tr><td class="cu">U</td><td class="cu">U</td><td class="cu">U</td></tr>
+                <tr><td class="cu">U</td><td class="ct">T</td><td class="cf">F</td></tr>
+                <tr><td class="ct">T</td><td class="cf">F</td><td class="cu">U</td></tr>
+                <tr><td class="ct">T</td><td class="cu">U</td><td class="cf">F</td></tr>
+                <tr><td class="ct">T</td><td class="ct">T</td><td class="cf">F</td></tr>
+            </tbody>
+        </table>
+        <div>
+            <p>Notes:</p>
+            <p><b>1.</b> nand(a, b) is not(and(a, b)).</p>
+        </div>
+        <p>or a, b</p>
+        <table width="14.5%" cellspacing="0" class="item">
+            <tbody>
+                <tr><th>a</th><th>b</th><th>q</th></tr>
+                <tr><td class="cf">F</td><td class="cf">F</td><td class="cf">F</td></tr>
+                <tr><td class="cf">F</td><td class="cu">U</td><td class="ct">T</td></tr>
+                <tr><td class="cf">F</td><td class="ct">T</td><td class="ct">T</td></tr>
+                <tr><td class="cu">U</td><td class="cf">F</td><td class="ct">T</td></tr>
+                <tr><td class="cu">U</td><td class="cu">U</td><td class="cu">U</td></tr>
+                <tr><td class="cu">U</td><td class="ct">T</td><td class="ct">T</td></tr>
+                <tr><td class="ct">T</td><td class="cf">F</td><td class="ct">T</td></tr>
+                <tr><td class="ct">T</td><td class="cu">U</td><td class="ct">T</td></tr>
+                <tr><td class="ct">T</td><td class="ct">T</td><td class="ct">T</td></tr>
+            </tbody>
+        </table>
+        <div>
+            <p>Notes:</p>
+            <p><b>1.</b> or(a, b) = nand(nand(a, b), nand(a, b)).</p>
+        </div>
+    </body>
+</html>
