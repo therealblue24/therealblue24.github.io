@@ -1,1 +1,0 @@
-# awfulcode is a joke
