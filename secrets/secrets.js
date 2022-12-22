@@ -1,3 +1,5 @@
+//awful code. do not touch.
+
 $(document).ready(function () {
     $("#button1").click(function (e) { 
         e.preventDefault();
