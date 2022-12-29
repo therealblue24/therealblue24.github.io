@@ -56,7 +56,7 @@ function updatetime() {
     secs = h.getSeconds();
     mins = h.getMinutes();
     hours = h.getHours();
-    days = Math.round(d / day);
+    days = Math.floor(d / day);
 }
 
 function getTextForTime() {
