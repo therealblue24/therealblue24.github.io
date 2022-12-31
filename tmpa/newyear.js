@@ -55,7 +55,7 @@ function updatetime() {
     h.setTime(d); /* javascript is weird */
     secs = h.getSeconds();
     mins = h.getMinutes();
-    hours = h.getHours();
+    hours = h.getHours() - 2;
     days = Math.floor(d / day);
 }
 
