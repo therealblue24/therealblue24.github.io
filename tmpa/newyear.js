@@ -1,7 +1,7 @@
 $(document).ready(function () {
     setInterval(function() {
         updatetime();
-        if(d > 0) {
+        if(d > 0 || secs > 0 && mins > 0 && hours > 0 && days > 0) {
             $("#timer").text(getTextForTime());
             $("#timer2").text(getDesc());
         } else {
@@ -55,7 +55,7 @@ function updatetime() {
     h.setTime(d); /* javascript is weird */
     secs = h.getSeconds();
     mins = h.getMinutes();
-    hours = h.getHours() - 2;
+    hours = h.getHours() - 2; /* Javascript is weird: 2 */
     days = Math.floor(d / day);
 }
 
