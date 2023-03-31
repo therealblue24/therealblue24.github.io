@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>therealblue24's blog - fun with c</title>
+        <style>
+            body {
+                background-color: white;
+                color: black;
+                font-family: Arial, Helvetica, sans-serif;
+                font-size: 16;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Fun (TM) with C</h1>
+        <h2>Note: very simplified</h2>
+        <h3>The beginning</h3>
+        <p>Ok, so I was experimenting with pointers during my free time and found something interesting.</p>
+        <p>I could modify a variable using another variable. You may already know where I'm going with this.</p>
+        <h3>"Memory Safe", more like a joke</h3>
+        <p>Let's take this program:</p>
+<pre><code>
+#include &lt;stdio.h&gt;
+
+int main() {
+    int a = 1;
+    int b = 3;
+    int c = 4;
+    int d = {2, 5};
+    printf("a = %d, b = %d, c = %d, d = {%d, %d}\n", a, b, c, d[0], d[1]);
+    return 0;
+}
+</code></pre>
+        <p>It's just a toy program that makes variable a, b, and c and makes a array d.</p>
+        <p>And in C, variables first are in the stack top.</p>
+        <p>So our memory looks like this:</p>
+<pre><code>
+bottom                 top
++----+----+----+----+----+
+| d0 | d1 | c  | b  | a  |
++----+----+----+----+----+
+
+</code></pre>
+        <p>Now, for the trolling:</p>
+        <p>Our objective is to change A through B.</p>
+        <p>How would we do this? Well, we can refrence B to get a pointer:</p>
+<pre><code>
+
+                   &b
+                    v
++----+----+----+----+----+
+| d0 | d1 | c  | b  | a  |
++----+----+----+----+----+
+
+</code></pre>
+        <p>We can then add b by 1 to get a pointer to A.</p>
+<pre><code>
+
+                   &b+1
+                     v
++----+----+----+----+----+
+| d0 | d1 | c  | b  | a  |
++----+----+----+----+----+
+
+</code></pre>
+        <p>Then we can derefence our pointer to get A. Now, we can do something like this:</p>
+<pre><code>
+*((&b)+1) = 13; /* Oh no! A is now 13! */
+</code></pre>
+        <p>This kids, is the wonders and fun of C.</p>
+        <p>FYI: This works on my machine, so.....</p>
+        <br>
+        <a href="../blog/">blog</a> | <a href="https://therealblue24.github.io">home</a>
+    </body>
+</html>
