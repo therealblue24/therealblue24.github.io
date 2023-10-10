@@ -7,7 +7,7 @@ $(document).ready(function () {
     });
     $("#button2").click(function (e) {
         e.preventDefault();
-        decr(getedata(), getkey2());
+        decr(getedata(), getkey());
     })
 });
 
@@ -34,16 +34,21 @@ function getkey2() {
 }
 
 function getedata() {
-    return $("#data1").val();
+    return $("#url1").val();
 }
 
+let looming = "";
+
 function setTxtOut(a) {
+    //let b = "text/hex;m=" + mappings[$("#cipher option:selected").val()] + ";------" + a;
     $("#txt1").html("<code>" + a + "</code>");
+    looming = a;
 }
 
 function setTxtOut2(a) {
     //a = HTMLentities(a);
-    $("#txt").text(a);
+    $("#txt1").text(a);
+    looming = a;
 }
 
 function getTxtOut() {
@@ -51,7 +56,7 @@ function getTxtOut() {
 }
 
 function getTxtOut2() {
-    return $("#txt").text();
+    return $("#txt1").text();
 }
 
 function copyText(a) {
@@ -213,7 +218,19 @@ function arrayToString(bufferValue) {
 	return new TextDecoder("utf-8").decode(bufferValue);
 }
 
-function encr(a, c) {
+function lhex_e(a, c) {
+    var text = a;
+    var textBytes = aesjs.utils.utf8.toBytes(text);
+    setTxtOut(aesjs.utils.hex.fromBytes(textBytes));
+}
+
+function lhex_d(a, c) {
+    var text = a;
+    var textBytes = aesjs.utils.hex.toBytes(text);
+    setTxtOut(aesjs.utils.utf8.fromBytes(textBytes));
+}
+
+function encr_sh1(a, c) {
     c = expand(c, 15);
     b = stringToArray(c);
     var text = geturldata(a);
@@ -224,7 +241,7 @@ function encr(a, c) {
     setTxtOut(encryptedHex);
 }
 
-function decr(a, c) {
+function decr_sh1(a, c) {
     c = expand(c, 15);
     b = stringToArray(c);
     var encryptedBytes = aesjs.utils.hex.toBytes(a);
@@ -234,10 +251,121 @@ function decr(a, c) {
     setTxtOut2(decryptedText);
 }
 
+function encr_sh2(a, c) {
+    var c = expand(c, 15);
+    var b = stringToArray(c);
+    var text = geturldata(a);
+    var textBytes = aesjs.utils.utf8.toBytes(text);
+    var aes = new aesjs.ModeOfOperation.ofb(b, transpose(b));
+    var encryptedBytes = aes.encrypt(textBytes);
+    var encryptedHex = aesjs.utils.hex.fromBytes(encryptedBytes);
+    setTxtOut(encryptedHex);
+}
+
+function decr_sh2(a, c) {
+    var c = expand(c, 15);
+    var b = stringToArray(c);
+    var encryptedBytes = aesjs.utils.hex.toBytes(a);
+    var aes = new aesjs.ModeOfOperation.ofb(b, transpose(b));
+    var decryptedBytes = aes.decrypt(encryptedBytes);
+    var decryptedText = aesjs.utils.utf8.fromBytes(decryptedBytes);
+    setTxtOut2(decryptedText);
+}
+
+window.onload = function() {
+    navigator.permissions.query({ name: "write-on-clipboard" }).then((result) => {
+        if(result.state == "granted" || result.state == "prompt") {
+            console.log("yay");
+        }
+    });
+}
+
+function copyContent() {
+    navigator.clipboard.writeText(looming).then(() => {
+        console.log("yay 2");
+    },() => {
+        console.log(":(");
+    });
+}
+
+function rot13(str) {
+    const input = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+    const output = 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm';
+    let encoded = '';
+    for (let i=0; i < str.length; i++) {
+        const index = input.indexOf(str[i]);
+        if(index != -1) {
+            encoded += output[index];
+        } else {
+            encoded += str[i];
+        }
+    }
+
+    return encoded;
+}
+
+function rot13_encr(a, c) {
+    setTxtOut(rot13(a));
+}
+
+function rot13_decr(a, c) {
+    setTxtOut2(rot13(a));
+}
+
+let table_e = [encr_sh1, encr_sh2, rot13_encr, lhex_e];
+let table_d = [decr_sh1, decr_sh2, rot13_decr, lhex_d];
+
+function encr(a, c) {
+    var opt = $("#cipher option:selected").val();
+    var f = table_e[opt];
+    f(a, c);
+}
+
+function decr(a, c) {
+    var opt = $("#cipher option:selected").val();
+    var f = table_d[opt];
+    f(a, c);
+}
+
 function squish(a, d) {
-    var b;
-    for(let i=0;i<d;i++) {
+    var b = "";
+    for(let i=0;i<d+1;i++) {
         b += a[i];
     }
     return b;
+}
+
+function wa(d) {
+    var ret = d;
+    if(d > 255) {
+        ret = d - 255;
+    }
+    if(d < 0) {
+        ret = d + 255;
+    }
+    return Math.floor(ret);
+}
+
+function transpose_id(b) {
+    var o = 255 - b;
+    o = wa(o * 2);
+    o = wa(o - 255);
+    o = wa(o * o);
+    if(o > 255) {
+        o = o / 256;
+        o = wa(o);
+    } else if(o < 0) {
+        o = wa(o);
+    }
+    return o;
+}
+
+function transpose_unbound(a) {
+    var b = a;
+    b = b.map((byte) => (transpose_id(byte)));
+    return b;
+}
+
+function transpose(a) {
+    return transpose_unbound(stringToArray(expand(arrayToString(a), 15))); 
 }
