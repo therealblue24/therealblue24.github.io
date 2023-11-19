@@ -87,10 +87,19 @@ function test_captcha(inp) {
     }
     human_opinion += (human_opinion / 50) * mouse_speed;
     mouse_speed = 0;
-    if(res < human_opinion && res < 59 && human_opinion < 300) {
+    console.log(res);
+    console.log(human_opinion);
+    if(human_opinion == 0) {
+        if(res < 50) {
+            return "You are a human.";
+        } else {
+            return genmatheq();
+        }
+    }
+    if(res < human_opinion && res < 40 && human_opinion < 160) {
         human_opinion = 0;
         return "You are a human.";
-    } else if(res > human_opinion && human_opinion < 60) {
+    } else if(res > human_opinion && human_opinion < 60 && res < 55) {
         human_opinion = 0;
         return "You are a human.";
     } else if(res > human_opinion && human_opinion > 150) {
