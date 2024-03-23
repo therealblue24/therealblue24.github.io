@@ -3,6 +3,11 @@
     src: url("https://therealblue24.github.io/assets/VarelaRound-Regular.woff")
 }
 
+@font-face {
+    font-family: "MapleMono";
+    src: url("https://therealblue24.github.io/assets/MapleMono-Regular.ttf")
+}
+
 body {
     /* background-color: #202123; */
     background-color: rgb(36, 39, 57);
@@ -106,7 +111,7 @@ code {
     border-radius: 8px;
 }
 
-code .nopad {
+.nopad {
     padding: 0vw 0vh;
 }
 
