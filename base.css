@@ -18,10 +18,10 @@ body {
 
 a {
     transition-duration: 0.4s;
+    color: #5282e3;
 }
 
 a:link {
-    color: #5282e3;
     background-color: transparent;
     text-decoration: none;
 }
