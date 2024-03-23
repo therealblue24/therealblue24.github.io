@@ -18,10 +18,10 @@ body {
 
 a {
     transition-duration: 0.4s;
-    color: #5282e3;
 }
 
 a:link {
+    color: #5282e3;
     background-color: transparent;
     text-decoration: none;
 }
@@ -113,6 +113,7 @@ code {
     background-color:  rgb(26, 29, 47);
     padding: 0.5vw 0.5vh;
     border-radius: 8px;
+    display: block;
 }
 
 .nopad {
