@@ -105,3 +105,13 @@ code {
     padding: 0.5vw 0.5vh;
     border-radius: 8px;
 }
+
+code .nopad {
+    padding: 0vw 0vh;
+}
+
+img {
+    border: .5vw solid rgb(26, 29, 47);
+    border-radius: 8px;
+    padding: 2.5px;
+}
