@@ -2,14 +2,7 @@
 <html>
     <head>
         <title>therealblue24's blog - fun with c</title>
-        <style>
-            body {
-                background-color: white;
-                color: black;
-                font-family: Arial, Helvetica, sans-serif;
-                font-size: 16;
-            }
-        </style>
+        <link rel="stylesheet" href="https://therealblue24.github.io/base.css"></link>
     </head>
     <body>
         <h1>Fun (TM) with C</h1>
@@ -19,7 +12,7 @@
         <p>I could modify a variable using another variable. You may already know where I'm going with this.</p>
         <h3>"Memory Safe", more like a joke</h3>
         <p>Let's take this program:</p>
-<pre><code>
+<pre><code style="width: 55vw;">
 #include &lt;stdio.h&gt;
 
 int main() {
@@ -34,7 +27,7 @@ int main() {
         <p>It's just a toy program that makes variable a, b, and c and makes a array d.</p>
         <p>And in C, variables first are in the stack top.</p>
         <p>So our memory looks like this:</p>
-<pre><code>
+<pre><code style="width: 18.5vw;">
 bottom                 top
 +----+----+----+----+----+
 | d0 | d1 | c  | b  | a  |
@@ -44,7 +37,7 @@ bottom                 top
         <p>Now, for the trolling:</p>
         <p>Our objective is to change A through B.</p>
         <p>How would we do this? Well, we can refrence B to get a pointer:</p>
-<pre><code>
+<pre><code style="width: 18.5vw;">
 
                    &b
                     v
@@ -54,7 +47,7 @@ bottom                 top
 
 </code></pre>
         <p>We can then add b by 1 to get a pointer to A.</p>
-<pre><code>
+<pre><code style="width: 18.5vw;">
 
                    &b+1
                      v
@@ -64,7 +57,7 @@ bottom                 top
 
 </code></pre>
         <p>Then we can derefence our pointer to get A. Now, we can do something like this:</p>
-<pre><code>
+<pre><code style="display: inline;">
 *((&b)+1) = 13; /* Oh no! A is now 13! */
 </code></pre>
         <p>This kids, is the wonders and fun of C.</p>

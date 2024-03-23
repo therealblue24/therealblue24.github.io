@@ -56,8 +56,8 @@
         <h3>"Error-Correction" Discrete Cosine Transform</h3>
         <p>(I call this algorithim fDCT.)</p>
         <p>The way how fDCT works is by reconstructing the chunk and then detecting high frequences out of nowhere via deriatives.</p>
-        <p>If a deriative of the image chunk <code> i(x): x, y -> x + yw</code> still has these high out of nowhere frequences, then we do somehting called: <strong>Another Deriative.</strong> I never knew it ws rocket science. Anyway, here's a C-like psudeocode implemantion &nbsp;</p>
-        <pre><code class="nopad">struct jpeg_chunk fix(struct jpeg_chunk chk, float ins) {
+        <p>If a deriative of the image chunk <code style="width: 14.5vw; display: inline;"> i(x): x, y -> x + yw</code> still has these high out of nowhere frequences, then we do somehting called: <strong>Another Deriative.</strong> I never knew it ws rocket science. Anyway, here's a C-like psudeocode implemantion &nbsp;</p>
+        <pre><code style="width: 70vw;">struct jpeg_chunk fix(struct jpeg_chunk chk, float ins) {
         		struct jpeg_chk_f line = construct(chk);
         		line = deriative(line);
         		for(int i=0;i is smaller than 64;i++) {
