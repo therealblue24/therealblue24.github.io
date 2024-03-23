@@ -12,7 +12,7 @@ body {
     /* background-color: #202123; */
     background-color: rgb(36, 39, 57);
     color: white;
-    font-family: "VarelaRound", Arial, Helvetica, sans-serif;
+    font-family: "MapleMono", "VarelaRound", Arial, Helvetica, sans-serif;
     font-size: 16;
 }
 
@@ -46,7 +46,7 @@ button {
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-family: "VarelaRound", Arial, Helvetica, sans-serif;
+    font-family: "MapleMono", "VarelaRound", Arial, Helvetica, sans-serif;
     border-radius: 8px;
     transition-duration: 0.4s;
 }
@@ -55,7 +55,7 @@ input {
     background-color: rgb(63, 68, 95);
     border: none;
     color: white;
-    font-family: "VarelaRound", Arial, Helvetica, sans-serif;
+    font-family: "MapleMono", "VarelaRound", Arial, Helvetica, sans-serif;
     border-radius: 8px;
     transition-duration: 0.4s;
 }
@@ -77,7 +77,7 @@ select {
     border-radius: 8px;
     background-color: rgb(63, 68, 95);
     color: white;
-    font-family: "VarelaRound", Arial, Helvetica, sans-serif;
+    font-family: "MapleMono", "VarelaRound", Arial, Helvetica, sans-serif;
     transition-duration: 0.4s;
 }
 
@@ -90,7 +90,7 @@ textarea {
     border-radius: 8px;
     background-color: rgb(63, 68, 95);
     color: white;
-    font-family: "VarelaRound", Arial, Helvetica, sans-serif;
+    font-family: "MapleMono", "VarelaRound", Arial, Helvetica, sans-serif;
     transition-duration: 0.4s;
     resize: none;
     box-sizing: border-box;
