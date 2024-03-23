@@ -125,3 +125,31 @@ img {
     border-radius: 8px;
     padding: 2.5px;
 }
+
+.cred {
+    color: #ff5282;
+}
+
+.corange {
+    color: #ff7262;
+}
+
+.cyellow {
+    color: #ffee62;
+}
+
+.cgreen {
+    color: #52e382;
+}
+
+.cblue {
+    color: #5282e3;
+}
+
+.cindigo {
+    color: #6752dd;
+}
+
+.cpurple {
+    color: #8252f3;
+}
