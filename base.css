@@ -1,13 +1,13 @@
 @font-face {
     font-family: VarelaRound;
-    src: url(https://therealblue24.github.io/assets/VarelaRound-Regular.woff)
+    src: url("https://therealblue24.github.io/assets/VarelaRound-Regular.woff")
 }
 
 body {
     /* background-color: #202123; */
     background-color: rgb(36, 39, 57);
     color: white;
-    font-family: VarelaRound, Arial, Helvetica, sans-serif;
+    font-family: "VarelaRound", Arial, Helvetica, sans-serif;
     font-size: 16;
 }
 
