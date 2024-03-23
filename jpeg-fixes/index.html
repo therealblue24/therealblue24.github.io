@@ -2,19 +2,20 @@
 <html>
     <head>
         <title>therealblue24's website - JPEG Decoder fixes</title>
+        <link rel="stylesheet" href="https://therealblue24.github.io/base.css"></link>
         <style>
-            body {
-                background-color: white;
-                color: black;
-                font-family: Arial, Helvetica, sans-serif;
-                font-size: 16;
+            /** {
+                font-family: Arial;
+            }*/
+
+            img {
+                border: .5vw solid rgb(26, 29, 47);
+                border-radius: 8px;
+                padding: 2.5px;
             }
-            code {
-                font-family: Consolas;
-                color: black;
-                background-color: #f1f1f1;
-                padding: 2px;
-                font-size: 95%;
+
+            .nopad {
+                padding: 0vw 0vh;
             }
         </style>
     </head>
@@ -50,27 +51,27 @@
         <p>We want a algorithim that fixes the Luma part of the image without a hardcoded quailty factor. This is the hard route, people.</p>
         <p><strong>NOTE: The Luma part of the image will be restored more awfully than the Cb/Cr parts of the image because the JPEG formats goes "haha losing luma component info go bRRRRRRRRRRRRRRRRRRRRR"</strong></p>
         <p>I had 2 ways of doing this:</p>
-        <p>&emsp; 1. "Error-Correction" Discrete Cosine Transform</p>
-        <p>&emsp; 2. Predicting the quality of a 8 by 8 chunk</p>
+        <p>&emsp;1. "Error-Correction" Discrete Cosine Transform</p>
+        <p>&emsp;2. Predicting the quality of a 8 by 8 chunk</p>
         <h3>"Error-Correction" Discrete Cosine Transform</h3>
         <p>(I call this algorithim fDCT.)</p>
         <p>The way how fDCT works is by reconstructing the chunk and then detecting high frequences out of nowhere via deriatives.</p>
         <p>If a deriative of the image chunk <code> i(x): x, y -> x + yw</code> still has these high out of nowhere frequences, then we do somehting called: <strong>Another Deriative.</strong> I never knew it ws rocket science. Anyway, here's a C-like psudeocode implemantion &nbsp;</p>
-        <p><code>struct jpeg_chunk fix(struct jpeg_chunk chk, float ins) {</code></p>
-        <p><code>&emsp;&emsp;struct jpeg_chk_f line = construct(chk);</code></p>
-        <p><code>&emsp;&emsp;line = deriative(line);</code></p>
-        <p><code>&emsp;&emsp;for(int i=0;i is smaller than 64;i++) {</code></p>
-        <p><code>&emsp;&emsp;&emsp;&emsp;if(line.vis[i] >= ins) {</code></p>
-        <p><code>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;mark vis[i] as a artifact and blend it</code></p>
-        <p><code>&emsp;&emsp;&emsp;&emsp;}</code></p>
-        <p><code>&emsp;&emsp;&emsp;&emsp;if(line.vis[i] - line.vis[i--] >= ins * 2) {</code></p>
-        <p><code>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;line = deriative(line);</code></p>
-        <p><code>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;i = 0;</code></p>
-        <p><code>&emsp;&emsp;&emsp;&emsp;}</code></p>
-        <p><code>&emsp;&emsp;}</code></p>
-        <p><code>&emsp;&emsp;struct jpeg_chunk ret = assemblechunk(line);</code></p>
-        <p><code>&emsp;&emsp;return ret;</code></p>
-        <p><code>}</code></p>
+        <pre><code class="nopad">struct jpeg_chunk fix(struct jpeg_chunk chk, float ins) {
+        		struct jpeg_chk_f line = construct(chk);
+        		line = deriative(line);
+        		for(int i=0;i is smaller than 64;i++) {
+        				if(line.vis[i] >= ins) {
+        						mark vis[i] as a artifact and blend it
+        				}
+        				if(line.vis[i] - line.vis[i--] >= ins * 2) {
+        						line = deriative(line);
+        						i = 0;
+        				}
+        		}
+        		struct jpeg_chunk ret = assemblechunk(line);
+        		return ret;
+        }</code></pre>
         <h3>Predicting the quality of a 8 by 8 chunk</h3>
         <p>I think this algorithim is both easy and hard. Easy for humans, (time) complex for computers</p>
         <p><strong>Not finished yet.</strong></p>

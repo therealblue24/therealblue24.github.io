@@ -16,6 +16,10 @@ body {
     font-size: 16;
 }
 
+a {
+    transition-duration: 0.4s;
+}
+
 a:link {
     color: #5282e3;
     background-color: transparent;

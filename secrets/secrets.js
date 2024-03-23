@@ -312,6 +312,24 @@ function rot13_decr(a, c) {
     setTxtOut2(rot13(a));
 }
 
+function xor_prepass(a, c) {
+    let b = stringToArray(a);
+    b = b.map((d) => (d ^ 0b10101010));
+    let k = arrayToString(b);
+    lhex_e(k, k);
+}
+
+function xor_penc(a, c) {
+    xor_prepass(a, c);
+}
+
+function xor_pdec(a, c) {
+    var text = a;
+    var b = aesjs.utils.hex.toBytes(text);
+    b = b.map((d) => (d ^ 0b10101010)); 
+    setTxtOut(arrayToString(Uint8Array.from(b)));
+}
+
 let table_e = [encr_sh1, encr_sh2, rot13_encr, lhex_e];
 let table_d = [decr_sh1, decr_sh2, rot13_decr, lhex_d];
 
