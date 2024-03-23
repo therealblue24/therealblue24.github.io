@@ -99,3 +99,9 @@ textarea:focus {
 textarea:hover {
     background-color: rgb(83, 88, 115);
 }
+
+code {
+    background-color:  rgb(26, 29, 47);
+    padding: 0.5vw 0.5vh;
+    border-radius: 8px;
+}
