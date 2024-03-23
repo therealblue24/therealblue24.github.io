@@ -29,6 +29,37 @@ a:hover {
 
 a:active {
     color: #e35282;
-    background-color: transparent
+    background-color: transparent;
     text-decoration: underline;
 }
+
+button {
+    background-color: rgb(63, 68, 95);
+    border: none;
+    color: white;
+    padding: 0.7vw 0.7vh;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-family: "VarelaRound", Arial, Helvetica, sans-serif;
+    border-radius: 8px;
+    transition-duration: 0.4s;
+}
+
+input {
+    background-color: rgb(63, 68, 95);
+    border: none;
+    color: white;
+    font-family: "VarelaRound", Arial, Helvetica, sans-serif;
+    border-radius: 8px;
+    transition-duration: 0.4s;
+}
+
+input:focus {
+    background-color: rgb(83, 88, 115);
+}
+
+button:hover {
+    background-color: rgb(83, 88, 115);
+}
+
