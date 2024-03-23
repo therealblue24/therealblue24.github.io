@@ -63,3 +63,39 @@ button:hover {
     background-color: rgb(83, 88, 115);
 }
 
+input:hover {
+    background-color: rgb(83, 88, 115);
+}
+
+select {
+    border: none;
+    border-radius: 8px;
+    background-color: rgb(63, 68, 95);
+    color: white;
+    font-family: "VarelaRound", Arial, Helvetica, sans-serif;
+    transition-duration: 0.4s;
+}
+
+select:hover {
+    background-color: rgb(83, 88, 115);
+}
+
+textarea {
+    border: none;
+    border-radius: 8px;
+    background-color: rgb(63, 68, 95);
+    color: white;
+    font-family: "VarelaRound", Arial, Helvetica, sans-serif;
+    transition-duration: 0.4s;
+    resize: none;
+    box-sizing: border-box;
+    margin: 4px;
+}
+
+textarea:focus {
+    background-color: rgb(83, 88, 115);
+}
+
+textarea:hover {
+    background-color: rgb(83, 88, 115);
+}
